@@ -16,9 +16,9 @@ public class Producto implements Serializable{
     private float pro_precio;
     private int pro_stock;
     
-    /* @ManyToOne
-        @JoinColumn(name="inv_pro", nullable = false)
-    private Inventario pro_inv; */
+    @ManyToOne
+    @JoinColumn(name="inv_pro", nullable = false)
+    private Inventario pro_inv; 
     
     @ManyToOne
         @JoinColumn (name= "pla_pro", nullable = false)

@@ -4,6 +4,11 @@
  */
 package Vista.Prev;
 
+import entitys.Empleado;
+import CRUD.CRUDEmpleado;
+import Vista.Insert.FrmEmpleadoInsert;
+import javax.swing.JOptionPane;
+import Vista.FrmEmpleado;
 /**
  *
  * @author obeth
@@ -15,8 +20,15 @@ public class FrmEmpleadoPrev extends javax.swing.JFrame {
      */
     public FrmEmpleadoPrev() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
+    public void limpiar(){
+        this.txtIne.setText("");
+        this.txtNombre.setText("");
+        this.txtTelefono.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,6 +46,7 @@ public class FrmEmpleadoPrev extends javax.swing.JFrame {
         txtIne = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +59,18 @@ public class FrmEmpleadoPrev extends javax.swing.JFrame {
         jLabel4.setText("Telefono");
 
         jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,7 +79,10 @@ public class FrmEmpleadoPrev extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -86,12 +114,52 @@ public class FrmEmpleadoPrev extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String ine = txtIne.getText();
+        String nombre = txtNombre.getText();
+        String telefono = txtTelefono.getText();
+        
+        StringBuilder mensajeError = new StringBuilder();
+        if(ine.isEmpty()){
+            mensajeError.append("El campo de INE no puede estar vacio.\n");
+        }
+        
+        if(nombre.isEmpty()){
+            mensajeError.append("El campo de Nombre no puede estar vacio.\n");
+        }
+        
+        if(telefono.isEmpty()){
+            mensajeError.append("El campo de Telefono no puede estar vacio.\n");
+        }
+        
+        if (mensajeError.length() > 0) {
+             JOptionPane.showMessageDialog(null, mensajeError.toString(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            Empleado e1 = new Empleado(ine, nombre, telefono);
+            FrmEmpleadoInsert insert = new FrmEmpleadoInsert(this, e1);
+            
+            insert.setVisible(true);
+            this.setVisible(false);  
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        FrmEmpleado frmEmp = new FrmEmpleado();
+        frmEmp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,6 +198,7 @@ public class FrmEmpleadoPrev extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

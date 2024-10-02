@@ -42,6 +42,14 @@ public class Empleado implements Serializable{
                 emp_telefono + ", emp_lis=" + emp_lis + '}';
     }
     
+    public void formEmp_lis(Lista_Empleados_Zona l1){
+        getEmp_lis().add(l1);
+    }
+    
+    public void dropEmp_lis(Lista_Empleados_Zona l1){
+        getEmp_lis().remove(l1);
+    }
+    
     public void PrintListaEmpleados(){
         System.out.println("Salas: "+getEmp_lis().size());
         

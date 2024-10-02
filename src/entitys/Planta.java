@@ -12,6 +12,7 @@ public class Planta implements Serializable{
     
     @Id
     private String pla_nombre;
+    
     private String pla_clima;
     private String pla_cuidados;
     private String pla_humedad;

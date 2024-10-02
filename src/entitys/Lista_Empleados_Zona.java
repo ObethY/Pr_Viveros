@@ -11,6 +11,7 @@ import java.util.Date;
  *
  * @author obeth
  */
+
 @Entity
 public class Lista_Empleados_Zona implements Serializable {
  
@@ -28,7 +29,7 @@ public class Lista_Empleados_Zona implements Serializable {
         @JoinColumn(name="zon_lis", nullable = false)
     private Zona lis_zon;
 
-    public Lista_Empleados_Zona(int id_Lista, Date lis_fecha_Inicio, Date lis_fecha_Final, Empleado lis_emp) {
+    public Lista_Empleados_Zona(int id_Lista, Date lis_fecha_Inicio, Date lis_fecha_Final) {
         this.id_Lista = id_Lista;
         this.lis_fecha_Inicio = lis_fecha_Inicio;
         this.lis_fecha_Final = lis_fecha_Final;
@@ -48,7 +49,9 @@ public class Lista_Empleados_Zona implements Serializable {
                 + lis_fecha_Inicio + ", fecha_Final=" + lis_fecha_Final + ", lis_emp=" + lis_emp + '}';
     }
     
-    
+    public void formLis_emp(Empleado e){
+        this.lis_emp = e;
+    }
     
     //gettesrs y setters
 

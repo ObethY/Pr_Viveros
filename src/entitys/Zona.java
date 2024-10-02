@@ -12,6 +12,7 @@ import java.util.Date;
  *
  * @author obeth
  */
+
 @Entity
 public class Zona implements Serializable{
     
@@ -19,31 +20,46 @@ public class Zona implements Serializable{
     private String zon_nombre;
     
     private String zon_tipo;
+    private String descripcion;
     
     @OneToMany
         @JoinColumn (name="lis_zon", nullable = false)
     private ArrayList<Lista_Empleados_Zona> zon_lis = new ArrayList<Lista_Empleados_Zona>();
     
+    public void formZon_lis(Lista_Empleados_Zona li){
+        this.zon_lis.add(li);
+    }
+    
+    public void dropZon_lis(Lista_Empleados_Zona li){
+        this.zon_lis.remove(li);
+    }
+    
     @OneToMany
         @JoinColumn (name="zonpla_zon", nullable = false)
     private ArrayList<Zona_Plantas> zon_zonpla = new ArrayList<Zona_Plantas>();
     
-    /*
+    
     @ManyToOne
         @JoinColumn(name="viv_zon", nullable = false)
     private Vivero zon_viv;
     
+    public void formZon_viv(Vivero vi){
+        this.zon_viv = vi;
+    }
+    
     @ManyToOne
         @JoinColumn(name="inv_zon", nullable = false)
     private Inventario zon_inv;
-    */
+    
 
-    public Zona(String zon_nombre, String zon_tipo) {
+    public Zona(String zon_nombre, String zon_tipo,String descripcion) {
+        this.descripcion = descripcion;
         this.zon_nombre = zon_nombre;
         this.zon_tipo = zon_tipo;
     }
     
     public Zona() {
+        this.descripcion = null;
         this.zon_nombre = "";
         this.zon_tipo = "";
     }
@@ -65,6 +81,7 @@ public class Zona implements Serializable{
     }
     
     
+    
     //Getters y setters
 
     public String getZon_nombre() {
@@ -83,6 +100,14 @@ public class Zona implements Serializable{
         this.zon_tipo = zon_tipo;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     public ArrayList<Lista_Empleados_Zona> getZon_lis() {
         return zon_lis;
     }
