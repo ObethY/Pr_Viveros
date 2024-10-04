@@ -32,7 +32,7 @@ public class test {
 
         
         em.persist(P1);
-        /*
+        
         Empleado e1 = new Empleado("CADO031002HHGLZABA9", "Obeth", "7713185145");
         Empleado e2 = new Empleado("SRMZPT03090921M800", "Patricia", "7712926603");
         Empleado e3 = new Empleado("CASF884HHSL98AASD122", "Alejandro", "5512324321");
@@ -83,7 +83,7 @@ public class test {
         em.persist(l3);
         em.persist(l4);
         
-        */
+        
         em.getTransaction().commit();
 // Close the database connection:
         em.close();

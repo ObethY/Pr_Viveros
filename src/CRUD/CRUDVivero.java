@@ -17,7 +17,8 @@ import javax.persistence.TypedQuery;
  * @author obeth
  */
 public class CRUDVivero {
-        public List readVivero(String field, String crit) {
+    
+    public List readVivero(String field, String crit) {
 
         // Open a database connection
         // (create a new database if it doesn't exist yet):
@@ -38,5 +39,18 @@ public class CRUDVivero {
         em.close();
         emf.close();
         return results;
+    }
+     
+      public Vivero opBuscar (String codigo) {
+        Vivero v = null;
+        // Open a database connection
+        // (create a new database if it doesn't exist yet):
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/vivero.odb");
+        EntityManager em = emf.createEntityManager();
+            v = em.find(Vivero.class, codigo);
+        // Close the database connection:
+        em.close();
+        emf.close();
+        return v;
     }
 }

@@ -34,11 +34,11 @@ public class Vivero implements Serializable {
     @JoinColumn(name = "zon_viv", nullable = false)
     private List<Zona> viv_zon = new ArrayList();
     
-    public void formViv_lis(Zona zo){
+    public void formViv_zon(Zona zo){
         this.viv_zon.add(zo);
     }
 
-    public void dropViv_lis(Zona zo){
+    public void dropViv_zon(Zona zo){
         this.viv_zon.remove(zo);
     }
     

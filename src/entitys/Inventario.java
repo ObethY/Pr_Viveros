@@ -57,5 +57,5 @@ public class Inventario implements Serializable {
     }
 
     
-    
+        
 }

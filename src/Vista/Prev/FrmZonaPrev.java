@@ -5,6 +5,7 @@
 package Vista.Prev;
 
 import CRUD.CRUDVivero;
+import Vista.FrmZona;
 import Vista.Insert.FrmZonaInsert;
 import entitys.Vivero;
 import entitys.Zona;
@@ -29,6 +30,7 @@ public class FrmZonaPrev extends javax.swing.JFrame {
         qvivero = new CRUDVivero();
         
         llenarVivero();
+        
     }
     
     public void limpiar(){
@@ -36,6 +38,7 @@ public class FrmZonaPrev extends javax.swing.JFrame {
         this.txtNombre.setText("");
         this.cmbTipo.setSelectedIndex(0);
         this.cmbVivero.setSelectedIndex(0);
+        this.txtSuperficie.setText("");
     }
     
     private void llenarVivero(){
@@ -65,6 +68,10 @@ public class FrmZonaPrev extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         btnConfirmar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtSuperficie = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        btnRegresarZona = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,7 +83,7 @@ public class FrmZonaPrev extends javax.swing.JFrame {
 
         jLabel4.setText("Tipo:");
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zona Exterior", "zona Interior", "Almacen", "Caja", "Regadio", "Almácigos", "Invernadero" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Zona Exterior", "Zona Interior", "Zona climatizada", "Almacen", "Caja", "Regadio", "Almácigos", "Invernadero" }));
 
         jLabel5.setText("Descripcion");
 
@@ -91,6 +98,17 @@ public class FrmZonaPrev extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Superificie:");
+
+        jLabel7.setText("m2");
+
+        btnRegresarZona.setText("Regresar");
+        btnRegresarZona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarZonaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,26 +118,36 @@ public class FrmZonaPrev extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(161, 161, 161))
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnRegresarZona)
+                                .addGap(4, 4, 4)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(60, 60, 60)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cmbVivero, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel7)))))))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,9 +170,16 @@ public class FrmZonaPrev extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnConfirmar)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtSuperficie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConfirmar)
+                    .addComponent(btnRegresarZona))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -155,7 +190,9 @@ public class FrmZonaPrev extends javax.swing.JFrame {
         String zon_nombre = txtNombre.getText();
         String zon_tipo = cmbTipo.getSelectedItem().toString();
         String zon_descripcion = txtDescripcion.getText();
-        String zon_vivString = txtDescripcion.getText();
+        String zon_vivString = cmbVivero.getSelectedItem().toString();
+        String superficietxt = txtSuperficie.getText();
+        int zon_superficie=-1;
         
         StringBuilder mensajeError = new StringBuilder();
         
@@ -165,20 +202,42 @@ public class FrmZonaPrev extends javax.swing.JFrame {
         if(zon_descripcion.isEmpty()){
             mensajeError.append("El campo de descripcion no puede estar vacio.\n");
         }
-        if(cmbTipo.getSelectedIndex() > 0 || cmbVivero.getSelectedIndex() > 0 ){
+        if(cmbTipo.getSelectedIndex() < 0 || cmbVivero.getSelectedIndex() < 0 ){
             mensajeError.append("Error al Seleccionar vivero o tipo, favor de veridicar.\n");
         }
-         if (mensajeError.length() > 0) {
+        
+        if (superficietxt.isEmpty()) {
+            mensajeError.append("El campo de Superficie no puede estar vacío.\n");
+        } else {
+            try {
+                zon_superficie = Integer.parseInt(superficietxt);
+
+                if (zon_superficie <= 0) {
+                    mensajeError.append("La superficie no puede ser negativa o nula.\n");
+                }
+            } catch (NumberFormatException e) {
+                mensajeError.append("El valor de superficie debe ser un número entero válido.\n");
+            }
+        }
+        
+        if (mensajeError.length() > 0) {
              JOptionPane.showMessageDialog(null, mensajeError.toString(), 
                 "Error", JOptionPane.ERROR_MESSAGE);
         }else{
-            Zona e1 = new Zona(zon_nombre, zon_tipo, zon_descripcion);
-             FrmZonaInsert insert = new FrmZonaInsert(this, e1,zon_vivString);
+            Zona e1 = new Zona(zon_nombre, zon_tipo, zon_descripcion,zon_superficie);
+            FrmZonaInsert insert = new FrmZonaInsert(this, e1,zon_vivString);
             
             insert.setVisible(true);
             this.setVisible(false);  
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnRegresarZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarZonaActionPerformed
+        // TODO add your handling code here:
+        FrmZona frmZ = new FrmZona();
+        frmZ.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarZonaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,6 +276,7 @@ public class FrmZonaPrev extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnRegresarZona;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JComboBox<String> cmbVivero;
     private javax.swing.JLabel jLabel1;
@@ -224,8 +284,11 @@ public class FrmZonaPrev extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtSuperficie;
     // End of variables declaration//GEN-END:variables
 }

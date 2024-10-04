@@ -4,40 +4,37 @@
  */
 package Vista;
 
-import CRUD.CRUDEmpleado;
-import Vista.Prev.FrmEmpleadoPrev;
-import entitys.Empleado;
+import CRUD.CRUDZona;
+import Vista.Prev.FrmZonaPrev;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
+import entitys.Zona;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.TableModel;
+
 /**
  *
  * @author obeth
  */
-public class FrmEmpleado extends javax.swing.JFrame {
-    private CRUDEmpleado qEmpleado =  new CRUDEmpleado();
-    List<Empleado> emplist = new ArrayList();
+public class FrmZona extends javax.swing.JFrame {
+
+    private CRUDZona qZona = new CRUDZona();
+    List<Zona> zonList = new ArrayList();
     /**
-     * Creates new form FrmEmpleado
+     * Creates new form FrmZona
      */
-    public FrmEmpleado() {
+    public FrmZona() {
         initComponents();
         setLocationRelativeTo(null);
-        llenarTablaEmpleado();
-        
+        llenarTablaZona();
+    }
+
+    public void llenarTablaZona(){
+        zonList = qZona.getZona("", "");
+        TableModel modelo = qZona.listToTableModel(zonList);
+        tbZona.setModel(modelo);
     }
     
-public void llenarTablaEmpleado() {
-    // Llenar la lista de empleados
-    emplist = qEmpleado.getEmpleado("", "");
-
-    // Crear el TableModel usando la lista de empleados
-    TableModel modelo = qEmpleado.listToTableModel(emplist);
-
-    // Asignar el modelo a la tabla existente
-    tbEmpleado.setModel(modelo); 
-}
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,13 +45,13 @@ public void llenarTablaEmpleado() {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbEmpleado = new javax.swing.JTable();
-        btnAgregar = new javax.swing.JButton();
+        tbZona = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         btnRegresarMain = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tbEmpleado.setModel(new javax.swing.table.DefaultTableModel(
+        tbZona.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -62,12 +59,12 @@ public void llenarTablaEmpleado() {
 
             }
         ));
-        jScrollPane1.setViewportView(tbEmpleado);
+        jScrollPane1.setViewportView(tbZona);
 
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -83,48 +80,50 @@ public void llenarTablaEmpleado() {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
                         .addComponent(btnRegresarMain)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAgregar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(jButton1)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
+                    .addComponent(jButton1)
                     .addComponent(btnRegresarMain))
-                .addGap(33, 33, 33))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        FrmEmpleadoPrev frmEmpleado = new FrmEmpleadoPrev();
-        frmEmpleado.setVisible(true);
+        FrmZonaPrev frmZonPre = new FrmZonaPrev();
+        frmZonPre.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnAgregarActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnRegresarMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMainActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:\
         Main frmM = new Main();
         frmM.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarMainActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnRegresarMain;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbEmpleado;
+    private javax.swing.JTable tbZona;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,7 +20,8 @@ public class Zona implements Serializable{
     private String zon_nombre;
     
     private String zon_tipo;
-    private String descripcion;
+    private String zon_descripcion;
+    private int zon_superficie;
     
     @OneToMany
         @JoinColumn (name="lis_zon", nullable = false)
@@ -38,6 +39,26 @@ public class Zona implements Serializable{
         @JoinColumn (name="zonpla_zon", nullable = false)
     private ArrayList<Zona_Plantas> zon_zonpla = new ArrayList<Zona_Plantas>();
     
+    public void formZon_zonpla(Zona_Plantas zp){
+        this.zon_zonpla.add(zp);
+    }
+    
+    public void dropZon_zonpla(Zona_Plantas zp){
+        this.zon_zonpla.remove(zp);
+    }
+    
+    @OneToMany
+        @JoinColumn (name="inv_zon", nullable = false)
+    private ArrayList<Inventario> zon_inv = new ArrayList<Inventario>();
+    
+    public void formZon_inv(Inventario in){
+        this.zon_inv.add(in);
+    }
+    
+    public void dropZon_inv(Inventario in){
+        this.zon_inv.remove(in);
+    }
+    
     
     @ManyToOne
         @JoinColumn(name="viv_zon", nullable = false)
@@ -45,23 +66,20 @@ public class Zona implements Serializable{
     
     public void formZon_viv(Vivero vi){
         this.zon_viv = vi;
-    }
-    
-    @ManyToOne
-        @JoinColumn(name="inv_zon", nullable = false)
-    private Inventario zon_inv;
-    
+    }  
 
-    public Zona(String zon_nombre, String zon_tipo,String descripcion) {
-        this.descripcion = descripcion;
+    public Zona(String zon_nombre, String zon_tipo,String descripcion, int zon_superficie) {
+        this.zon_descripcion = descripcion;
         this.zon_nombre = zon_nombre;
         this.zon_tipo = zon_tipo;
+        this.zon_superficie = zon_superficie;
     }
     
     public Zona() {
-        this.descripcion = null;
+        this.zon_descripcion = null;
         this.zon_nombre = "";
         this.zon_tipo = "";
+        this.zon_superficie = 0;
     }
     
     public void PrintListaEmpleados(){
@@ -101,11 +119,43 @@ public class Zona implements Serializable{
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return zon_descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.zon_descripcion = descripcion;
+    }
+
+    public String getZon_descripcion() {
+        return zon_descripcion;
+    }
+
+    public void setZon_descripcion(String zon_descripcion) {
+        this.zon_descripcion = zon_descripcion;
+    }
+
+    public int getZon_superficie() {
+        return zon_superficie;
+    }
+
+    public void setZon_superficie(int zon_superficie) {
+        this.zon_superficie = zon_superficie;
+    }
+
+    public ArrayList<Inventario> getZon_inv() {
+        return zon_inv;
+    }
+
+    public void setZon_inv(ArrayList<Inventario> zon_inv) {
+        this.zon_inv = zon_inv;
+    }
+
+    public Vivero getZon_viv() {
+        return zon_viv;
+    }
+
+    public void setZon_viv(Vivero zon_viv) {
+        this.zon_viv = zon_viv;
     }
     
     public ArrayList<Lista_Empleados_Zona> getZon_lis() {
@@ -130,6 +180,4 @@ public class Zona implements Serializable{
                 zon_tipo + ", Lista Empleado=" + zon_lis + ", Zona plantas=" +
                 zon_zonpla + '}';
     }
-    
-    
 }

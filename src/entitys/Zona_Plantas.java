@@ -19,6 +19,7 @@ public class Zona_Plantas implements Serializable{
     
     private float zonpla_temperatura;
     private String zonpla_humedad;
+ 
     
     @ManyToOne
         @JoinColumn(name="zon_zonpla", nullable = false)
