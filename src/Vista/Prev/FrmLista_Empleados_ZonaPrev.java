@@ -7,14 +7,19 @@ package Vista.Prev;
 import CRUD.CRUDEmpleado;
 import CRUD.CRUDVivero;
 import CRUD.CRUDZona;
+import Vista.Insert.FrmLista_Empleados_ZonaInsert;
+import Vista.Insert.FrmZonaInsert;
 import entitys.Empleado;
+import entitys.Lista_Empleados_Zona;
 import entitys.Vivero;
 import entitys.Zona;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -67,6 +72,18 @@ public class FrmLista_Empleados_ZonaPrev extends javax.swing.JFrame {
             cmbZona.addItem(z.getZon_nombre());
         }
 
+    }
+    
+    public void limpiar(){
+        this.cmbEmpleado.setSelectedIndex(0);
+        this.cmbVIvero.setSelectedIndex(0);
+        this.cmbZona.setSelectedIndex(0);
+        this.cmbHoraFin.setSelectedIndex(0);
+        this.cmbHoraInicio.setSelectedIndex(0);
+        this.spnMInInicio.setValue(0);
+        this.spnMinFin.setValue(0);
+        this.dateFin.setDate(null);
+        this.dateInicio.setDate(null);
     }
 
     /**
@@ -273,64 +290,83 @@ public class FrmLista_Empleados_ZonaPrev extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
+           // Obtener valores seleccionados
         String zona = cmbZona.getSelectedItem().toString();
-        String empleado = cmbEmpleado.getSelectedItem().toString();
+        String empleadoINE = cmbEmpleado.getSelectedItem().toString(); // Aquí obtenemos el INE del empleado
+        String vivero = cmbVIvero.getSelectedItem().toString();
+
         
-        //Fechas
+        // Fechas y horas
         String horaInitxt = cmbHoraInicio.getSelectedItem() != null ? cmbHoraInicio.getSelectedItem().toString() : "";
         String horafintxt = cmbHoraFin.getSelectedItem() != null ? cmbHoraFin.getSelectedItem().toString() : "";
-        
+
         Date fechaInicio = dateInicio.getDate();
-        String fchIni="";
-        
         Date fechaFin = dateFin.getDate();
-        String fchFin="";
-        
+
         int minIni = (Integer) spnMInInicio.getValue();
         int minFin = (Integer) spnMinFin.getValue();
         int horaIni = Integer.parseInt(horaInitxt);
         int horaFin = Integer.parseInt(horafintxt);
-        
+
         StringBuilder mensajeError = new StringBuilder();
-        
-        if(cmbEmpleado.getSelectedIndex() < 0 || cmbVIvero.getSelectedIndex() < 0 
-            || cmbZona.getSelectedIndex() < 0){
-            mensajeError.append("Debe seleccionar opciones validas en vivero, empleado y zona.\n");
+
+        // Validación de campos
+        if (cmbEmpleado.getSelectedIndex() < 0 || cmbVIvero.getSelectedIndex() < 0 || cmbZona.getSelectedIndex() < 0) {
+            mensajeError.append("Debe seleccionar opciones válidas en vivero, empleado y zona.\n");
         }
-        
-        //VALIDACIONES PARA FECHA Y HORA
-        
+
+        // Validar fechas
         if (fechaInicio == null) {
-            mensajeError.append("Debe ingresar una fecha de Inicio.\n");
-        }else{
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-            fchIni = dateFormat.format(fechaInicio); 
+            mensajeError.append("Debe ingresar una fecha de inicio.\n");
         }
         if (fechaFin == null) {
-            mensajeError.append("Debe ingresar una fecha de Fin.\n");
-        }else{
-            SimpleDateFormat dateFormatOrden = new SimpleDateFormat("yyyy-mm-dd");
-            dateFormatOrden.setTimeZone(TimeZone.getTimeZone("UTC"));
-            fchIni = dateFormatOrden.format(fechaFin);
+            mensajeError.append("Debe ingresar una fecha de fin.\n");
         }
-        if (fechaInicio != null && fechaFin != null) {
-            if (fechaInicio.after(fechaFin)) {
-                mensajeError.append("La fecha de Inicio no puede ser posterior a la fecha de Fin.\n");
-            }
+        if (fechaInicio != null && fechaFin != null && fechaInicio.after(fechaFin)) {
+            mensajeError.append("La fecha de inicio no puede ser posterior a la fecha de fin.\n");
         }
-        
+
+        // Validar horas
         if (cmbHoraInicio.getSelectedIndex() == -1) {
-            mensajeError.append("Debe seleccionar una hora valida.\n");
+            mensajeError.append("Debe seleccionar una hora válida para el inicio.\n");
         }
         if (cmbHoraFin.getSelectedIndex() == -1) {
-            mensajeError.append("Debe seleccionar una hora valida.\n");
+            mensajeError.append("Debe seleccionar una hora válida para el fin.\n");
         }
-        
-        if (minIni<0||minIni>59 || minFin<0 || minFin > 59) {
-            mensajeError.append("Los minutos deben de estar en un rango de 0 a 59.\n");
+
+        // Validar minutos
+        if (minIni < 0 || minIni > 59 || minFin < 0 || minFin > 59) {
+            mensajeError.append("Los minutos deben estar en un rango de 0 a 59.\n");
         }
-        
+
+        if (mensajeError.length() > 0) {
+            // Mostrar errores
+            JOptionPane.showMessageDialog(null, mensajeError.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Combinar fecha y hora en Calendar
+            Calendar calInicio = Calendar.getInstance();
+            calInicio.setTime(fechaInicio);
+            calInicio.set(Calendar.HOUR_OF_DAY, horaIni);
+            calInicio.set(Calendar.MINUTE, minIni);
+            calInicio.set(Calendar.SECOND, 0);
+            Date Inifch = calInicio.getTime();  // Fecha y hora de inicio combinada
+
+            Calendar calFin = Calendar.getInstance();
+            calFin.setTime(fechaFin);
+            calFin.set(Calendar.HOUR_OF_DAY, horaFin);
+            calFin.set(Calendar.MINUTE, minFin);
+            calFin.set(Calendar.SECOND, 0);
+            Date Finfch = calFin.getTime();  // Fecha y hora de fin combinada
+
+            // Crear nuevo objeto Lista_Empleados_Zona
+            Lista_Empleados_Zona nuevaLista = new Lista_Empleados_Zona(0, 
+                    Inifch, Finfch);
+            FrmLista_Empleados_ZonaInsert frminsert = new FrmLista_Empleados_ZonaInsert(nuevaLista,
+                    this, vivero , empleadoINE, zona);
+            
+            frminsert.setVisible(true);
+            this.setVisible(false);            
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**

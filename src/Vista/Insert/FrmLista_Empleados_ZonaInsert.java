@@ -4,17 +4,41 @@
  */
 package Vista.Insert;
 
+import CRUD.CRUDLista_Empleados_Zona;
+import Vista.Prev.FrmLista_Empleados_ZonaPrev;
+import entitys.Lista_Empleados_Zona;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author obeth
  */
 public class FrmLista_Empleados_ZonaInsert extends javax.swing.JFrame {
-
+    
+    Lista_Empleados_Zona L1 = new Lista_Empleados_Zona();
+    private FrmLista_Empleados_ZonaPrev frmLiprev;
+    
+    String empleado="",zona="";
+    
+    
     /**
      * Creates new form FrmLista_Empleados_ZonaInsert
      */
-    public FrmLista_Empleados_ZonaInsert() {
+    public FrmLista_Empleados_ZonaInsert(Lista_Empleados_Zona l1, FrmLista_Empleados_ZonaPrev flp,
+    String viv, String emp, String zon) {
         initComponents();
+        setLocationRelativeTo(null);
+        txtEmpleado.setText(emp);
+        txtVivero.setText(viv);
+        txtZona.setText(zon);
+        txtFechaInicio.setText(l1.getLis_fecha_Inicio().toString());
+        txtFechaFin.setText(l1.getLis_fecha_Final().toString());
+        
+        this.L1 = l1;
+        this.empleado = emp;
+        this.zona = zon;
+        frmLiprev = flp;
+       
     }
 
     /**
@@ -38,7 +62,7 @@ public class FrmLista_Empleados_ZonaInsert extends javax.swing.JFrame {
         txtFechaInicio = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtFechaFin = new javax.swing.JLabel();
-        btnRegresar = new javax.swing.JButton();
+        Regresar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
@@ -68,11 +92,26 @@ public class FrmLista_Empleados_ZonaInsert extends javax.swing.JFrame {
 
         txtFechaFin.setText("jLabel3");
 
-        btnRegresar.setText("jButton1");
+        Regresar.setText("Regresar");
+        Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegresarActionPerformed(evt);
+            }
+        });
 
-        btnConfirmar.setText("jButton2");
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
-        btnCancelar.setText("jButton3");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,7 +122,7 @@ public class FrmLista_Empleados_ZonaInsert extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                         .addComponent(txtFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -106,10 +145,10 @@ public class FrmLista_Empleados_ZonaInsert extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(btnRegresar)
-                .addGap(81, 81, 81)
+                .addComponent(Regresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnConfirmar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
                 .addComponent(btnCancelar)
                 .addGap(21, 21, 21))
         );
@@ -140,7 +179,7 @@ public class FrmLista_Empleados_ZonaInsert extends javax.swing.JFrame {
                     .addComponent(txtFechaFin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRegresar)
+                    .addComponent(Regresar)
                     .addComponent(btnConfirmar)
                     .addComponent(btnCancelar))
                 .addGap(26, 26, 26))
@@ -149,45 +188,46 @@ public class FrmLista_Empleados_ZonaInsert extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmLista_Empleados_ZonaInsert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmLista_Empleados_ZonaInsert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmLista_Empleados_ZonaInsert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmLista_Empleados_ZonaInsert.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        
+        CRUDLista_Empleados_Zona lista = new CRUDLista_Empleados_Zona();       
+        
+        if(lista.CreateListaEmpleadoZona(L1,zona,empleado)){
+         JOptionPane.showMessageDialog(null, "La Lista de Empleado con zona ha sido registrada",
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Error verifique los datos",
+                    "Fallo", JOptionPane.WARNING_MESSAGE); 
         }
-        //</editor-fold>
+        
+        frmLiprev.setVisible(true);
+        frmLiprev.limpiar();
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmLista_Empleados_ZonaInsert().setVisible(true);
-            }
-        });
-    }
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        frmLiprev.setVisible(true);
+        frmLiprev.limpiar();
+        this.dispose();
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
+        // TODO add your handling code here:
+        frmLiprev.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_RegresarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Regresar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

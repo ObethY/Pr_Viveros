@@ -25,9 +25,16 @@ public class Lista_Empleados_Zona implements Serializable {
         @JoinColumn(name="emp_lis", nullable = false)
     private Empleado lis_emp;
     
+    
+    
     @ManyToOne
         @JoinColumn(name="zon_lis", nullable = false)
     private Zona lis_zon;
+    
+    public void formLis_zon(Zona zon){
+        this.lis_zon = zon;
+    }
+    
 
     public Lista_Empleados_Zona(int id_Lista, Date lis_fecha_Inicio, Date lis_fecha_Final) {
         this.id_Lista = id_Lista;
@@ -86,7 +93,4 @@ public class Lista_Empleados_Zona implements Serializable {
     public void setLis_emp(Empleado lis_emp) {
         this.lis_emp = lis_emp;
     }
-
-    
-    
 }
