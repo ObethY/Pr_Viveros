@@ -6,6 +6,7 @@ package entitys;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 /**
  *
@@ -16,7 +17,6 @@ public class Empleado implements Serializable{
     
     @Id
     private String emp_ine;
-    
     private String emp_nombre;
     private String emp_telefono;
     
@@ -28,6 +28,18 @@ public class Empleado implements Serializable{
         this.emp_ine = emp_ine;
         this.emp_nombre = emp_nombre;
         this.emp_telefono = emp_telefono;
+    }
+    
+    @OneToMany
+    @JoinColumn (name= "viv_emp", nullable = false)
+    private List<Vivero> emp_viv = new ArrayList<Vivero>();
+    
+    public void formEmp_viv(Vivero v1){
+        getEmp_viv().add(v1);
+    }
+    
+    public void dropEmp_viv(Vivero v1){
+        getEmp_viv().add(v1);
     }
     
     public Empleado() {
@@ -92,5 +104,13 @@ public class Empleado implements Serializable{
         this.emp_lis = emp_lis;
     }
 
+    public List<Vivero> getEmp_viv() {
+        return emp_viv;
+    }
 
+    public void setEmp_viv(List<Vivero> emp_viv) {
+        this.emp_viv = emp_viv;
+    }
+
+    
 }

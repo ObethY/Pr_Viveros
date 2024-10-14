@@ -107,6 +107,23 @@ public class CRUDEmpleado {
                 System.out.println("Encontro algo");
                return false;
             } 
-        }
+    }
+    
+    public List<Empleado> getEmpleados() {
+        // Abrir una conexión a la base de datos
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("$objectdb/db/vivero.odb");
+        EntityManager em = emf.createEntityManager();
+
+        // Crear y ejecutar una consulta para obtener todos los empleados
+        TypedQuery<Empleado> query = em.createQuery("SELECT e FROM Empleado e", Empleado.class);
+        List<Empleado> empleados = query.getResultList();
+
+        // Cerrar la conexión
+        em.close();
+        emf.close();
+
+        return empleados;
+    }
+    
     }
 

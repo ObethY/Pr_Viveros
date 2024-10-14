@@ -24,8 +24,7 @@ public class Lista_Empleados_Zona implements Serializable {
     @ManyToOne
         @JoinColumn(name="emp_lis", nullable = false)
     private Empleado lis_emp;
-    
-    
+       
     
     @ManyToOne
         @JoinColumn(name="zon_lis", nullable = false)

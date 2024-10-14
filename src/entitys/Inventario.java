@@ -12,22 +12,39 @@ import java.util.*;
 public class Inventario implements Serializable {
     
     @Id
-    private String codigo;
-    
+    private String codigo;    
     private int stock;
     
     @ManyToOne
     @JoinColumn(name="zon_inv",nullable=false)
     private Zona inv_zon;
+
+    public void formInv_zon(Zona zo){
+        inv_zon = zo;
+    }
     
     @ManyToOne
     @JoinColumn(name="pro_inv",nullable=false)
     private Producto inv_pro;
 
+    public void formInv_pro(Producto p){
+        inv_pro= p;
+    }
+    
     public String getCodigo() {
         return codigo;
     }
 
+    public Inventario(String codigo, int stock) {
+        this.codigo = codigo;
+        this.stock = stock;
+    }
+    
+    public Inventario() {
+        this.codigo = null;
+        this.stock = 0;
+    }
+    
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -56,6 +73,9 @@ public class Inventario implements Serializable {
         this.inv_pro = inv_pro;
     }
 
-    
+    @Override
+    public String toString (){
+        return "Inventario{ " + "codigo: " + codigo + ", stock: " + stock + "}";
+    }
         
 }
