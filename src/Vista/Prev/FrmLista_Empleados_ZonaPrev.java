@@ -7,6 +7,7 @@ package Vista.Prev;
 import CRUD.CRUDEmpleado;
 import CRUD.CRUDVivero;
 import CRUD.CRUDZona;
+import Vista.FrmLista_Empleado_Zona;
 import Vista.Insert.FrmLista_Empleados_ZonaInsert;
 import Vista.Insert.FrmZonaInsert;
 import entitys.Empleado;
@@ -161,6 +162,11 @@ public class FrmLista_Empleados_ZonaPrev extends javax.swing.JFrame {
         });
 
         btnRegresarLista.setText("Regresar");
+        btnRegresarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarListaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -368,6 +374,14 @@ public class FrmLista_Empleados_ZonaPrev extends javax.swing.JFrame {
             this.setVisible(false);            
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnRegresarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarListaActionPerformed
+        // TODO add your handling code here:
+        FrmLista_Empleado_Zona frmZ = new FrmLista_Empleado_Zona();
+        frmZ.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnRegresarListaActionPerformed
 
     /**
      * @param args the command line arguments

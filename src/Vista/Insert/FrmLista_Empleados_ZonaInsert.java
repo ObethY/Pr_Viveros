@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmLista_Empleados_ZonaInsert extends javax.swing.JFrame {
     
-    Lista_Empleados_Zona L1 = new Lista_Empleados_Zona();
+    private Lista_Empleados_Zona L1 = new Lista_Empleados_Zona();
     private FrmLista_Empleados_ZonaPrev frmLiprev;
     
     String empleado="",zona="";
