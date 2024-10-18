@@ -11,7 +11,8 @@ import javax.persistence.*;
 public class Planta implements Serializable{
     
     @Id
-    private String pla_nombre;   
+    private String pla_nombre;
+    
     private String pla_clima;
     private String pla_cuidados;
     private String pla_humedad;
@@ -20,10 +21,6 @@ public class Planta implements Serializable{
     @ManyToOne
         @JoinColumn (name = "pro_pla", nullable = false)
     private Producto pla_pro;
-    
-    public void formPla_pro(Producto p){
-        pla_pro = p;
-    }
 
     public Planta(String pla_nombre, String pla_clima, String pla_cuidados, String pla_humedad, String pla_luz) {
         this.pla_nombre = pla_nombre;
@@ -79,14 +76,8 @@ public class Planta implements Serializable{
 
     public void setPla_luz(String pla_luz) {
         this.pla_luz = pla_luz;
-    }    
-    
-    @Override
-    public String toString (){
-        return "Planta{ " + "nombre: " + pla_nombre + ", clima: " + pla_clima +
-                ", cuidados: " + pla_cuidados + ", humedad: " + pla_humedad + 
-                ", luz: " + pla_luz + "}";
     }
+    
     
     
 }
